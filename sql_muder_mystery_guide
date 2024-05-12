@@ -1,0 +1,28 @@
+-- 1. Identify the crime screne report the bonehead officer "forgot" somewhere lol
+select *
+from crime_scene_report
+where type = 'murder'
+and date = 20180115
+and city = 'SQL City';
+
+-- 2. According to the description from the query's output:
+-- "Security footage shows that there were 2 witnesses. The first witness lives at the last house on "Northwestern Dr". The second witness, named Annabel, lives somewhere on "Franklin Ave"."
+-- Gather more information over the two witnesses
+select *
+from person
+where address_street_name = 'Northwestern Dr'
+order by address_number desc;
+-- found witness #1: 
+--       id	name	license_id	address_number	address_street_name	ssn
+--       14887	Morty Schapiro	118009	4919	Northwestern Dr	111564949
+
+select *
+from person
+where address_street_name = 'Franklin Ave'
+and name like 'Annabel%'; 
+-- found witness #2:
+--       id	name	license_id	address_number	address_street_name	ssn
+--       16371	Annabel Miller	490173	103	Franklin Ave	318771143
+
+-- 3. Research the two witnesses for more clues
+-- investigating Annabel:
